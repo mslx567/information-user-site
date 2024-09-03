@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mslx.ir</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"> <!-- Favicon link -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset basic styles */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        /* Hide audio controls */
+        audio {
+            display: none;
+        }
+        /* Fullscreen button styles */
+        #enter-fullscreen, #play-music {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        #enter-fullscreen {
+            left: 20px;
+        }
+        #play-music {
+            left: 180px;
+        }
+        /* Loading screen styles */
+        #loading-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background: black;
+            color: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+        #loading-screen .loading-text {
+            font-size: 24px;
+        }
+        /* Particles background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('images/background.gif') no-repeat center center fixed;
+            background-size: cover;
+            z-index: -1;
+        }
+        /* Main content container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            color: white;
+        }
+        .profile-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            margin-right: 20px;
+        }
+        .text h1 {
+            margin: 0;
+            font-size: 3rem;
+        }
+        .description {
+            margin-top: 60px; /* Adjusted margin-top to move description text higher */
+        }
+        .description p {
+            margin: 5px 0;
+        }
+        .carousel-container {
+            position: absolute; /* Absolute positioning */
+            bottom: 0; /* Move it to the bottom of the page */
+            left: 0; /* Aligns the carousel to the left edge */
+            width: 100vw; /* Full viewport width */
+            height: 200px; /* Adjust height if necessary */
+            overflow: hidden; /* Hide overflow to ensure smooth animation */
+            box-sizing: border-box;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .carousel {
+            display: inline-flex;
+            align-items: center;
+        }
+        .carousel-item {
+            width: 150px;
+            height: 150px;
+            margin: 0 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-text">Loading...</div>
+    </div>
+
+    <!-- Fullscreen and Music Buttons -->
+    <button id="enter-fullscreen">Enter Fullscreen</button>
+    <button id="play-music">Play Music</button>
+
+    <!-- Background music -->
+    <audio id="background-music" src="path/to/your/music.mp3"></audio>
+
+    <!-- Particles Effect -->
+    <div id="particles-js"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile">
+                <img src="images/profile.jpg" alt="Profile Picture">
+            </div>
+            <div class="text">
+                <h1>mslx</h1>
+            </div>
+        </div>
+        <div class="description">
+            <p>Hi, I am mslx. My real name is Amin 👀</p>
+            <p>I am active on social media platforms like YouTube and Instagram 📽️</p>
+            <p>In my free time, I develop Minecraft and work on websites 🧑‍💻</p>
+            <p>You can make me happy by joining my Discord channel 😄</p>
+            <p>https://discord.gg/T2tmqURad6</p>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel">
+                <img src="images/projects/project1.jpg" alt="Project 1" class="carousel-item">
+                <img src="images/projects/project2.jpg" alt="Project 2" class="carousel-item">
+                <img src="images/projects/project3.jpg" alt="Project 3" class="carousel-item">
+                <img src="images/projects/project4.jpg" alt="Project 4" class="carousel-item">
+                <img src="images/projects/project5.jpg" alt="Project 5" class="carousel-item">
+                <img src="images/projects/project6.jpg" alt="Project 6" class="carousel-item">
+            </div>
+        </div>
+    </div>
+
+    <!-- Load JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fullscreen button functionality
+            document.getElementById('enter-fullscreen').addEventListener('click', function() {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                    document.documentElement.msRequestFullscreen();
+                }
+            });
+
+            // Play music button functionality
+            document.getElementById('play-music').addEventListener('click', function() {
+                const audio = document.getElementById('background-music');
+                audio.volume = 0.5; // Set volume level (0.0 to 1.0)
+                audio.play().catch(error => {
+                    console.log('Autoplay was prevented:', error);
+                });
+            });
+
+            // Hide loading screen after content has loaded
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.display = 'none';
+            }, 3000); // Adjust the time as needed
+
+            // Initialize particles.js
+            particlesJS.load('particles-js', 'particles.json', function() {
+                console.log('particles.js loaded - callback');
+            });
+        });
+    </script>
+</body>
+</html>
